@@ -90,7 +90,7 @@ def acc(x_ij, M_i, G=0.1, approx_error=0.001, out=None):
         if (mod_dr_k < error_value).any():
             #message = '|dr|, |dr|-->0 , , there for the dr has been repalced by configured error value {}  '.format(error_value)
             mod_dr_k[mod_dr_k < error_value] = error_value
-            # print(message)
+            # # print(message)
 
         # if x_kj.shape[0] > 2 :
             # warnings.showwarning(
@@ -204,8 +204,7 @@ class GravityField:
         self._mvelocity = self._mvelocity + a*self.h
 
     def run(self, n, C=0.01, approx_error=0.001):
-        '''  Starting point 
-
+        """Starting point
         Parametes :
                 n  : number
                 number of itetaion (integration)
@@ -219,9 +218,7 @@ class GravityField:
                 X,Y pandas data frames 
                 returns the  evolution  of all coordinates 
                 of X, Y in time
-
-        Еxample :
-         '''
+         """
 
         self.h = C
         self.number_iter = n
@@ -232,7 +229,7 @@ class GravityField:
         self.error = approx_error
         self.number_iteration = n
 
-        print('start calculation {}'.format(datetime.now()))
+        # print('start calculation {}'.format(datetime.now()))
 
         for i in range(self.number_iteration):
             self.__leapFrog_step1()
@@ -243,7 +240,7 @@ class GravityField:
             sys.stdout.write("\r%d%%" % p)
             sys.stdout.flush()
 
-        print(' calculation  completed :{}'.format(datetime.now()))
+        # print(' calculation  completed :{}'.format(datetime.now()))
 
         self.__save__()
         return self.__result__()
@@ -252,7 +249,7 @@ class GravityField:
         columns = ['body_' + str(i) for i in range(self.x_cordinates[0].size)]
         self.X_cordinates = pd.DataFrame(self.x_cordinates, columns=columns)
         self.Y_cordinates = pd.DataFrame(self.y_cordinates, columns=columns)
-        print('calculation complete succsefuly')
+        # print('calculation complete succsefuly')
 
     def __result__(self):
 
@@ -314,7 +311,7 @@ class GravityField:
                 figsize = value
             elif key == 'size_body':
                 self.size_body = value
-            elif key == show_trajectory:
+            elif key == 'show_trajectory':
                 self.show_trajectory = value
 
         fig = plt.figure(figsize=figsize)
@@ -334,9 +331,9 @@ class GravityField:
                 random_name, N, self.number_iteration)
 
         name = name+'.mp4'
-        print('start rendering {}'.format(datetime.now()))
+        # print('start rendering {}'.format(datetime.now()))
         anim.save(name, writer=writer)
-        print('end rendering {}'.format(datetime.now()))
+        # print('end rendering {}'.format(datetime.now()))
         # HTML(anim.to_html5_video())  ### for notebooks
 
     def generate_random(self, N_bodies, mass=[20, 500], r_x=[-5, 5], r_y=[-5, 5], r_0=0, velocity=[-5, 5], alpha=[0, 360]):
@@ -352,21 +349,21 @@ class GravityField:
                 (a/360)*2*np.pi), v*np.cos((a/360)*2*np.pi), v*np.sin((a/360)*2*np.pi), mass=m))
 
 
-field = GravityField()
-
-
-field.generate_random(2000, mass=[100, 900], r_x=[0, 2000], r_y=[
-                      0, 6000], r_0=-1000, alpha=[0, 360], velocity=[0, 500])
-field.add_body(Body(x0=0, y0=0, v_x=100, v_y=100, mass=9999))
-
-
-field.generate_random(2000, mass=[100, 900], r_x=[0, 1000], r_y=[0, 6000], alpha=[0, 360],r_0=19000,velocity=[0,500])
-field.add_body(Body(x0=1000,y0=1000,v_x=100,v_y=100,mass=9999))
-
-
-
-#field.generate_random(2100, mass=[1000, 2000], r_x=[-500, 2000], r_y=[-1000, 0],r_0=15000,velocity=[0,1500], alpha=[0, 360])
-
-
-field.run(2500, C=0.3)
-field.save_animation(frames=150, title='galaxy', size_body=5)  # size_body=100
+# field = GravityField()
+#
+#
+# field.generate_random(2000, mass=[100, 900], r_x=[0, 2000], r_y=[
+#                       0, 6000], r_0=-1000, alpha=[0, 360], velocity=[0, 500])
+# field.add_body(Body(x0=0, y0=0, v_x=100, v_y=100, mass=9999))
+#
+#
+# field.generate_random(2000, mass=[100, 900], r_x=[0, 1000], r_y=[0, 6000], alpha=[0, 360],r_0=19000,velocity=[0,500])
+# field.add_body(Body(x0=1000,y0=1000,v_x=100,v_y=100,mass=9999))
+#
+#
+#
+# #field.generate_random(2100, mass=[1000, 2000], r_x=[-500, 2000], r_y=[-1000, 0],r_0=15000,velocity=[0,1500], alpha=[0, 360])
+#
+#
+# field.run(2500, C=0.3)
+# field.save_animation(frames=150, title='galaxy', size_body=5)  # size_body=100
