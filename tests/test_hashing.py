@@ -10,7 +10,8 @@ class TestDigest(TestCase):
             "An enchantress disguised as an old beggar woman arrives at a castle during a ball and offers the host, a cruel and selfish prince, a rose in return for shelter from a storm. When he refuses, she reveals her identity. As punishment for the prince's lack of compassion, the enchantress transforms him into a beast and his servants into household objects, then erases the castle, himself, and his servants from the memories of their loved ones and everyone else in the town. She casts a spell on the rose and warns the prince that the spell will only be broken if he learns to love another, and earn their love in return before the last petal falls, or he will remain a beast forever. ",
             "0=> th > operator use to overwrite the file if exist other wise it will create new file E.X. cat >example1 => If file 'example1' is exist than it will over write else create new file => the >> operator use to append the end of the file E.X. cat >>example1",
             "gogogaga",
-            ""
+            "",
+            "x"
         ]
 
         for each in cases:
@@ -23,6 +24,7 @@ class TestDigest(TestCase):
     def test_avalanche(self):
 
         cases = [
+            ("","a"),
             ("gogogaga", "kokokaka"),
             ("abcde", "adcde"),
             ("An enchantress disguised as an old beggar woman arrives at a castle during a ball and offers the host, a cruel and selfish prince, a rose in return for shelter from a storm. When he refuses, she reveals her identity. As punishment for the prince's lack of compassion, the enchantress transforms him into a beast and his servants into household objects, then erases the castle, himself, and his servants from the memories of their loved ones and everyone else in the town. She casts a spell on the rose and warns the prince that the spell will only be broken if he learns to love another, and earn their love in return before the last petal falls, or he will remain a beast forever. ","An enchantress disguised as an old beggar woman arrives at a castle during a ball and offers the host, a cruel and selfish prince, a rose in return for shelter from a storm. When he refuses, she reveals her identity. As punishment for the prince's lack of compassion, the enchantress transforms him into a beast and his servants into household objects, then erases the castle, himself, and his servants from the memories of their loved ones and everyone else in the town. She casts a spell on the rose and warns the prince that the spell will only be broken if he learns to love another, and earn their love in return before the last petal falls, or he will remain a beast forever and ever. "),
