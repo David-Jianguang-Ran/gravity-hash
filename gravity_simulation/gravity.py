@@ -1,4 +1,4 @@
-# vectorized computation
+# vectorized computation code forked from https://github.com/daodavid/gravity-simulation
 import numpy as np
 from numba import float64, int64, f8, float32
 from numba import guvectorize
@@ -236,9 +236,9 @@ class GravityField:
             self.__leapFrog_step2()
 
             # print out progress bar
-            p = ((i+1)/self.number_iteration)*100
-            sys.stdout.write("\r%d%%" % p)
-            sys.stdout.flush()
+            # p = ((i+1)/self.number_iteration)*100
+            # sys.stdout.write("\r%d%%" % p)
+            # sys.stdout.flush()
 
         # print(' calculation  completed :{}'.format(datetime.now()))
 
