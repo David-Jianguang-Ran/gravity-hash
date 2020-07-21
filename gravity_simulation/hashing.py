@@ -2,7 +2,7 @@ import random
 import numpy as np
 import pandas as pd
 
-from gravity import Body, GravityField
+from .gravity import Body, GravityField
 
 BLOCK_SIZE = 36
 STEPS_PER_BLOCK = 36
@@ -86,6 +86,22 @@ def initial_state():
     return x_hist, y_hist
 
 
+def convert_output(x_hist, y_hist):
+    """
+    this function takes output of the mangle function and maps it into chars
+    hopefully the distribution of chars will be somewhat uniform
+    """
+
+    # make one int table from both axis history
+    int_array = np.concatenate([x_hist[-1:,:],y_hist[-1:,:]],axis=0).reshape((-1,)).astype("int")
+
+    # convert ints into chars
+    out_string = ""
+    for each in int_array.tolist():
+        out_string += chr(each % 89 + 33)
+
+    return out_string
+
 def get_digest_v0(input_string):
     # process input, initialize state
     blocks = StringBlocks(input_string)
@@ -107,28 +123,5 @@ def get_digest_v0(input_string):
 
     if DEBUG:
         print(f"ran {track_iter} hash cycles")
-    return x_state, y_state
 
-
-if __name__ == "__main__":
-
-    # turning str text into blocks
-    x, y = get_digest_v0("abc")
-
-    x2, y2 = get_digest_v0("hex()' method is used to convert a floating point number to its hexadecimal value. Similarly, we can use_ 'float. fromhex()'_ method to convert a hexadecimal string value to its floating point representation. _ 'hex()'_ is an instance method but 'fromhex()' is a class method.")
-
-    diff = np.subtract(x[-1],x2[-1])
-    print(diff)
-    print(pd.DataFrame(diff).describe())
-
-
-    # [ -1.39534423  -6.99973334   5.78744396  -0.37319565   7.43097657
-    #   -7.55381039  -2.10933655   4.37338402   3.54345427  -4.45149958
-    #   -6.74949104   6.60779521   3.22929528  -6.05417295  -3.97739053
-    #    1.694767    -4.04415126   2.30068728  -1.40401531   1.05249822
-    #    3.79085782  -9.68294861 -13.89271987  -2.38416732  -4.34744362
-    #   -9.82891504  30.36799571  -0.42839479  16.31355407   1.36332335
-    #   -8.44843964   2.50247134  -5.92938919 -17.69406546  -4.76395654
-    #   -2.44526999  -3.11163217  -7.74514035   8.19352214  -1.73700277
-    #    7.39580681  -7.72864348  -5.87194684 -24.04437982  -6.55360507
-    #   -0.80934382 -16.11358163  -7.08872588]
+    return convert_output(x_state,y_state)
