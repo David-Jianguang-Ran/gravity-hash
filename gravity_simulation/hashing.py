@@ -2,7 +2,7 @@ import random
 import numpy as np
 import pandas as pd
 
-from gravity_simulation.gravity import Body, GravityField
+from .gravity import Body, GravityField
 
 BLOCK_SIZE = 36
 STEPS_PER_BLOCK = 36
