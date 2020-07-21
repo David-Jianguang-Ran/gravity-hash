@@ -5,7 +5,8 @@ import pandas as pd
 from .gravity import Body, GravityField
 
 BLOCK_SIZE = 36
-STEPS_PER_BLOCK = 36
+STEPS_PER_BLOCK = 24
+STEP_WIDTH_CONSTANT = 0.1
 MASS_CONSTANT = 25600  # <= this constant seems to change digest diff a lot
 
 DEBUG = False
@@ -69,7 +70,7 @@ def mangle(x_hist, y_hist, text_block):
         g_field.add_body(Body(x0=x,y0=y,v_x=x_vel[i],v_y=y_vel[i],mass=ord(text_block[i]) * MASS_CONSTANT))
 
     # do simulation
-    x_hist_new, y_hist_new = g_field.run(STEPS_PER_BLOCK)
+    x_hist_new, y_hist_new = g_field.run(STEPS_PER_BLOCK, STEP_WIDTH_CONSTANT)
 
     if DEBUG:
         with np.printoptions(precision=1, suppress=True):
@@ -98,9 +99,10 @@ def convert_output(x_hist, y_hist):
     # convert ints into chars
     out_string = ""
     for each in int_array.tolist():
-        out_string += chr(each % 89 + 33)
+        out_string += chr(each % 74 + 48)
 
     return out_string
+
 
 def get_digest_v0(input_string):
     # process input, initialize state
