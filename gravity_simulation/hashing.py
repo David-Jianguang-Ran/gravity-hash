@@ -2,13 +2,13 @@ import random
 import numpy as np
 import pandas as pd
 
-from .gravity import Body, GravityField
+from gravity import Body, GravityField
 
 BLOCK_SIZE = 36
 STEPS_PER_BLOCK = 36
 MASS_CONSTANT = 25600  # <= this constant seems to change digest diff a lot
 
-DEBUG = True
+DEBUG = False
 
 
 class StringBlocks:
@@ -72,7 +72,8 @@ def mangle(x_hist, y_hist, text_block):
     x_hist_new, y_hist_new = g_field.run(STEPS_PER_BLOCK)
 
     if DEBUG:
-        print(f"hashing:{text_block} \nhash:{x_hist_new.values[-1,:]}\n{y_hist_new.values[-1,:]}")
+        with np.printoptions(precision=1, suppress=True):
+            print(f"hashing:{text_block} \nhash:{x_hist_new.values[-1,:]}\n{y_hist_new.values[-1,:]}")
 
     return x_hist_new.values[-2:,:], y_hist_new.values[-2:,:]
 
