@@ -5,9 +5,9 @@ import pandas as pd
 from .gravity import Body, GravityField
 
 BLOCK_SIZE = 36
-STEPS_PER_BLOCK = 24
-STEP_WIDTH_CONSTANT = 0.1
-MASS_CONSTANT = 25600  # <= this constant seems to change digest diff a lot
+STEPS_PER_BLOCK = 12
+STEP_WIDTH_CONSTANT = 1
+MASS_CONSTANT = 1E8  # <= this constant seems to change digest diff a lot
 
 DEBUG = False
 
