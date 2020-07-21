@@ -24,8 +24,9 @@ having one body for each character of the text block,
 setting the position and momentum of each body based on either initial state or previous block output, 
 setting the mass of each body according to each char of the text block. 
 Then run the simulation for a fixed amount of steps.
+
 Finally when the blocks are exhausted, return digest string based on the position and momentum stored on the internal state.
-Note that information on the mass of each body is discarded / changed at each block. This makes the process non-irreversible.
+Note that information on the mass of each body is discarded / changed at each block. This makes the process irreversible.
  
 
 ## Documentation
